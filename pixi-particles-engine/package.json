@@ -1,0 +1,29 @@
+{
+    "name": "pixi-particles-engine",
+    "version": "0.1.0",
+    "description": "High-performance PixiJS v8 particle engine with behaviours and pooling",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "development": "./src/index.ts",
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "watch": "tsc -w"
+    },
+    "peerDependencies": {
+        "pixi.js": "^8.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "license": "MIT"
+}

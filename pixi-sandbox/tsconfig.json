@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "preserveSymlinks": true,
+        "paths": {
+            "pixi-particles-engine": ["./node_modules/pixi-particles-engine/dist/index.d.ts"]
+        }
+    },
+    "include": ["src"]
+}
