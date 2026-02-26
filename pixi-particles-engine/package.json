@@ -2,28 +2,48 @@
     "name": "pixi-particles-engine",
     "version": "0.1.0",
     "description": "High-performance PixiJS v8 particle engine with behaviours and pooling",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GandalfAl/pixi-particles.git",
+        "directory": "pixi-particles-engine"
+    },
+    "bugs": {
+        "url": "https://github.com/GandalfAl/pixi-particles/issues"
+    },
+    "homepage": "https://github.com/GandalfAl/pixi-particles#readme",
+    "keywords": [
+        "pixi",
+        "pixijs",
+        "particles",
+        "particle-system",
+        "webgl"
+    ],
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "development": "./src/index.ts",
             "import": "./dist/index.js",
-            "types": "./dist/index.d.ts"
+            "default": "./dist/index.js"
         }
     },
     "files": [
-        "dist"
+        "dist",
+        "README.md",
+        "LICENSE"
     ],
     "scripts": {
-        "build": "tsc",
+        "build": "tsc -p tsconfig.json",
         "prepublishOnly": "npm run build",
-        "watch": "tsc -w"
+        "watch": "tsc -w -p tsconfig.json"
     },
     "peerDependencies": {
         "pixi.js": "^8.0.0"
     },
     "devDependencies": {
         "typescript": "^5.0.0"
-    },
-    "license": "MIT"
+    }
 }

@@ -168,6 +168,7 @@ export class Emitter extends ParticleContainer {
     private waveAcc = 0;
 
     private updateEmitterBound?: (ticker: Ticker) => void;
+    private tickerAttached = false;
 
     constructor(options: EmitterOptions, textureProvider: TextureProvider) {
         super({
@@ -296,7 +297,7 @@ export class Emitter extends ParticleContainer {
      */
     private emitParticles(dt: number): void {
         if (this.mode === "rate") {
-            const rate = this.ratePerSecond ?? 0.1;
+            const rate = this.ratePerSecond ?? 0;
             if (rate <= 0) return;
 
             /**
@@ -464,6 +465,7 @@ export class Emitter extends ParticleContainer {
      * Attaches the emitter update loop to the configured ticker.
      */
     private attachTicker(): void {
+        if (this.tickerAttached) return;
         if (!this.updateEmitterBound) {
             this.updateEmitterBound = this.updateEmitter.bind(this);
         }
@@ -473,14 +475,17 @@ export class Emitter extends ParticleContainer {
         }
 
         this.ticker.add(this.updateEmitterBound);
+        this.tickerAttached = true;
     }
 
     /**
      * Detaches the emitter update loop from the ticker.
      */
     private detachTicker(): void {
+        if (!this.tickerAttached) return;
         if (!this.ticker || !this.updateEmitterBound) return;
         this.ticker.remove(this.updateEmitterBound);
+        this.tickerAttached = false;
     }
 
     /**

@@ -41,3 +41,6 @@ temp/
 # Logs
 logs/
 *.log
+
+# npm
+*.tgz
