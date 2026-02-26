@@ -1,7 +1,6 @@
 import { PxParticle } from "../../px-particle";
 import { Behaviour } from "../../behaviour";
-import { Emitter } from "../../emitter";
-import { BehaviourUtils } from "../behaviour-utils";
+import { Utils } from "../../utils";
 
 export class RadialBurstBehaviour implements Behaviour {
     public readonly requires = { position: true };
@@ -23,8 +22,8 @@ export class RadialBurstBehaviour implements Behaviour {
 
     public onSpawn(p: PxParticle) {
         const half = this.spread * 0.5;
-        const angle = this.direction + BehaviourUtils.rand(-half, half);
-        const speed = BehaviourUtils.rand(this.minSpeed, this.maxSpeed);
+        const angle = this.direction + Utils.rand(-half, half);
+        const speed = Utils.rand(this.minSpeed, this.maxSpeed);
 
         p.vx = Math.cos(angle) * speed;
         p.vy = Math.sin(angle) * speed;

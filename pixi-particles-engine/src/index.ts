@@ -3,7 +3,6 @@ export * from "./emitter";
 export * from "./texture-provider";
 export * from "./behaviours/alpha-behaviour";
 export * from "./behaviours/alpha-curve-behaviour";
-export * from "./behaviours/behaviour-utils";
 export * from "./behaviours/scale-curve-behaviour";
 export * from "./behaviours/curved-behaviour/curve-key-frame";
 export * from "./behaviours/curved-behaviour/curve-sampler";

@@ -1,5 +1,4 @@
 import { Utils } from "../../utils";
-import { BehaviourUtils } from "../behaviour-utils";
 import { CurveKeyframe, EaseFn, CurveOptions } from "./curve-key-frame";
 
 export class Curve {
@@ -13,7 +12,7 @@ export class Curve {
 
         const cleaned: CurveKeyframe[] = (keyframes ?? [])
             .map((k) => ({
-                time: BehaviourUtils.clamp01(k.time),
+                time: Utils.clamp01(k.time),
                 value: k.value,
                 ease: k.ease,
             }))
@@ -30,7 +29,7 @@ export class Curve {
     }
 
     public sample(t01: number): number {
-        const t = BehaviourUtils.clamp01(t01);
+        const t = Utils.clamp01(t01);
 
         const i = this.findSegmentIndex(t);
         const k0 = this.keys[i];
@@ -40,10 +39,10 @@ export class Curve {
         if (span <= 0) return this.clampValue(k1.value);
 
         let u = (t - k0.time) / span;
-        u = BehaviourUtils.clamp01(u);
+        u = Utils.clamp01(u);
 
         const ease = k0.ease ?? this.defaultEase;
-        if (ease) u = BehaviourUtils.clamp01(ease(u));
+        if (ease) u = Utils.clamp01(ease(u));
 
         const v = Utils.lerp(k0.value, k1.value, u);
         return this.clampValue(v);
