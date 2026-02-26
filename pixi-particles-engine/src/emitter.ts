@@ -341,7 +341,7 @@ export class Emitter extends ParticleContainer {
         const p = this.pool.pop();
         if (!p) return;
 
-        p.texture = this.textureProvider.textureForSpawn(p);
+        if (this.textureProvider.textureForSpawn) p.texture = this.textureProvider.textureForSpawn(p);
 
         p.onSpawn();
 
