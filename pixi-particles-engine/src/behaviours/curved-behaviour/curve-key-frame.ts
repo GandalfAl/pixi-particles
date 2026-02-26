@@ -1,17 +1,23 @@
 export type EaseFn = (x: number) => number;
 
 export type CurveKeyframe = {
-    /** Normalized lifetime [0..1] */
+    /** Normalized lifetime [0..1]. */
     time: number;
-    /** Value at this time */
+
+    /** Value at this time. */
     value: number;
-    /** Ease for segment from this keyframe -> next keyframe */
+
+    /**
+     * Optional easing applied to the segment starting at this keyframe,
+     * i.e. easing used for interpolation from this keyframe -> next keyframe.
+     */
     ease?: EaseFn;
 };
 
 export type CurveOptions = {
-    /** Used when a segment has no per-keyframe ease */
+    /** Default easing used when a segment has no per-keyframe ease. */
     defaultEase?: EaseFn;
-    /** Clamp sampled output to [min..max] (optional) */
+
+    /** Optional clamp on sampled output. */
     clamp?: { min: number; max: number };
 };

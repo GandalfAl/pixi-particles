@@ -1,7 +1,13 @@
 import { Behaviour } from "../../behaviour";
 import { PxParticle } from "../../px-particle";
 
+/**
+ * Sets particle scale at spawn time.
+ *
+ */
 export class StaticScaleBehaviour implements Behaviour {
+    public readonly priority = -60;
+
     public spawnScale: number;
 
     constructor(spawnScale: number) {

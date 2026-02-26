@@ -1,8 +1,11 @@
 import { PxParticle } from "../../px-particle";
 import { Behaviour } from "../../behaviour";
 
+/**
+ * Spawns particles uniformly inside a rectangle centered at (0, 0).
+ * */
 export class RectangleSpawnBehaviour implements Behaviour {
-    public readonly priority: number = 0;
+    public readonly priority = -100;
 
     constructor(
         private readonly width: number,
@@ -17,6 +20,7 @@ export class RectangleSpawnBehaviour implements Behaviour {
         p.y = this.rand(-hh, hh);
     }
 
+    /** Inclusive-exclusive uniform random. */
     private rand(min: number, max: number) {
         return min + Math.random() * (max - min);
     }

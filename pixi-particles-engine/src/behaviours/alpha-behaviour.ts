@@ -2,13 +2,21 @@ import { PxParticle } from "../px-particle";
 import { Behaviour } from "../behaviour";
 import { Emitter } from "../emitter";
 
+/**
+ * Linearly fades alpha from startAlpha -> endAlpha over particle lifetime.
+ */
 export class AlphaBehaviour implements Behaviour {
     public readonly requires = { color: true };
 
-    constructor(
-        private readonly startAlpha = 1,
-        private readonly endAlpha = 0,
-    ) {}
+    public readonly priority = 50;
+
+    public startAlpha = 1;
+    public endAlpha = 0;
+
+    constructor(startAlpha = 1, endAlpha = 0) {
+        this.startAlpha = startAlpha;
+        this.endAlpha = endAlpha;
+    }
 
     public onSpawn(p: PxParticle, _emitter: Emitter): void {
         p.alpha = this.startAlpha;
