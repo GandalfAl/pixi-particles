@@ -1,31 +1,52 @@
-import { ParticleProperties, Texture } from 'pixi.js';
-import { TextureProvider } from '../texture-provider';
+import { Texture } from "pixi.js";
+import { TextureProvider } from "../texture-provider";
+import { PxParticle } from "../px-particle";
 
-type WeightedTexture = { backgroundTexture: string; weight: number };
+type WeightedTexture = {
+    /** Key/URL/alias passed to PixiJS Texture.from(). */
+    textureId: string;
+    weight: number;
+};
 
+/**
+ * Chooses a random texture at spawn time using weighted probabilities.
+ *
+ * - Good for variety (different spark shapes, debris pieces, etc.)
+ * - Selection happens only on spawn (not per frame)
+ */
 export class WeightedTextureProvider implements TextureProvider {
-    public requires: ParticleProperties = { uvs: true }; // Because on spawn we change texture
-    private total = 0;
+    private readonly fallback: Texture;
+    private readonly items: { texture: Texture; weight: number }[];
 
-    constructor(
-        private items: WeightedTexture[],
-        private fallbackTexture: string,
-    ) {
-        for (const it of items) this.total += Math.max(0, it.weight);
+    private totalWeight = 0;
+
+    constructor(items: WeightedTexture[], fallbackTextureId: string) {
+        this.fallback = Texture.from(fallbackTextureId);
+
+        // Pre-cache textures and compute total weight (ignoring negatives)
+        this.items = items.map((it) => ({
+            texture: Texture.from(it.textureId),
+            weight: Math.max(0, it.weight),
+        }));
+
+        for (const it of this.items) this.totalWeight += it.weight;
     }
 
-    public initialTexture() {
-        return Texture.from(this.fallbackTexture);
+    public initialTexture(): Texture {
+        return this.fallback;
     }
 
-    public textureForSpawn() {
-        if (this.total <= 0) return Texture.from(this.fallbackTexture);
-        let r = Math.random() * this.total;
+    public textureForSpawn(_p: PxParticle): Texture {
+        if (this.totalWeight <= 0 || this.items.length === 0) return this.fallback;
+
+        let r = Math.random() * this.totalWeight;
 
         for (const it of this.items) {
-            r -= Math.max(0, it.weight);
-            if (r <= 0) return Texture.from(it.backgroundTexture);
+            r -= it.weight;
+            if (r <= 0) return it.texture;
         }
-        return Texture.from(this.items[this.items.length - 1]?.backgroundTexture ?? this.fallbackTexture);
+
+        // Floating point edge-case fallback
+        return this.items[this.items.length - 1]!.texture;
     }
 }
