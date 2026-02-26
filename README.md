@@ -1,99 +1,53 @@
 # pixi-particles
 
-A **PixiJS v8 particle engine** built with TypeScript, bundled in a
-monorepo with a Webpack sandbox for live development.
+A **high-performance PixiJS v8 particle engine** built with TypeScript.
+
+The core engine is published on npm as:
+
+👉 **pixi-particles-engine**\
+https://www.npmjs.com/package/pixi-particles-engine
 
 This repository contains:
 
-- `pixi-particles-engine` → The reusable particle engine package\
-- `pixi-sandbox` → A Webpack dev playground to test and preview
-  effects
+- `pixi-particles-engine` → The reusable particle engine package
+  (published on npm)
+- `pixi-sandbox` → A Webpack dev playground for live development and
+  testing
 
 ---
 
-## 🚀 Monorepo Setup
+# 📦 Install From npm
 
-This project uses **npm workspaces**.
-
-### Root `package.json`
-
-```json
-{
-    "private": true,
-    "workspaces": ["pixi-sandbox", "pixi-particles-engine"],
-    "scripts": {
-        "dev": "concurrently \"npm run watch -w pixi-particles-engine\" \"npm run start -w pixi-sandbox\""
-    },
-    "devDependencies": {
-        "concurrently": "^9.2.1"
-    }
-}
-```
-
----
-
-## 📦 Installation
+If you only want to use the engine in your project:
 
 ```bash
-git clone https://github.com/GandalfAl/pixi-particles
-cd pixi-particles
-npm install
+npm install pixi-particles-engine
+```
+
+```ts
+import { Emitter } from "pixi-particles-engine";
 ```
 
 ---
 
-## 🔥 Development
+# ✨ pixi-particles-engine
 
-Run everything from the **root directory**:
+A modular, extensible particle emitter built on top of PixiJS
+`ParticleContainer`, designed for real-time games and interactive
+graphics.
 
-```bash
-npm run dev
-```
+## 🚀 Features
 
-This will:
-
-- Watch and rebuild the engine (`tsc -w`)
-- Start the sandbox (`webpack serve` on port 3000)
-
-Open your browser at:
-
-    http://localhost:3000
-
----
-
-## 🏗 Project Structure
-
-    pixi-particles/
-    ├── pixi-particles-engine/
-    │   ├── src/
-    │   ├── package.json
-    │   └── tsconfig.json
-    │
-    ├── pixi-sandbox/
-    │   ├── src/
-    │   ├── public/
-    │   ├── webpack.config.js
-    │   └── package.json
-    │
-    └── package.json (workspace root)
-
----
-
-# 🧠 pixi-particles-engine
-
-A modular particle emitter built on top of PixiJS `ParticleContainer`.
-
-## Features
-
-- Object pooling
+- Object pooling (zero runtime allocations)
 - Emission modes: `rate`, `wave`, `manual`
-- Behaviour system (modular effects)
+- Priority-based behaviour system
 - Texture providers (single, weighted, animated)
-- Delta clamping for frame spikes
+- Delta time clamping for stability
+- Designed for performance and scalability
 
 ---
 
-## ✨ Basic Usage
+## 🔥 Basic Usage
 
 ```ts
 import { Emitter, AlphaBehaviour, RadialBurstBehaviour } from "pixi-particles-engine";
@@ -116,16 +70,16 @@ app.stage.addChild(emitter);
 
 ---
 
-## 🎛 Emission Modes
+# 🎛 Emission Modes
 
-### Rate Mode
+## Rate Mode
 
 ```ts
 mode: "rate",
 ratePerSecond: 50
 ```
 
-### Wave Mode
+## Wave Mode
 
 ```ts
 mode: "wave",
@@ -133,7 +87,7 @@ waveInterval: 0.1,
 particlesPerWave: 8
 ```
 
-### Manual Mode
+## Manual Mode
 
 ```ts
 mode: "manual";
@@ -148,23 +102,23 @@ emitter.emitWave();
 
 # 🎨 Built-in Behaviours
 
-### Alpha
+## Alpha
 
 - `AlphaBehaviour(start, end)`
 - `AlphaCurveBehaviour(keyframes)`
 
-### Scale
+## Scale
 
 - `StaticScaleBehaviour(value)`
 - `ScaleCurveBehaviour(keyframes)`
 
-### Movement
+## Movement
 
 - `RadialBurstBehaviour(minSpeed, maxSpeed)`
 - `MovementCurveBehaviour(vxCurve, vyCurve)`
 - `GravityCurveBehaviour(gx, gy, strengthCurve)`
 
-### Spawn
+## Spawn
 
 - `RectangleSpawnBehaviour(width, height)`
 - `CircleSpawnBehaviour(radius)`
@@ -179,38 +133,61 @@ emitter.emitWave();
 
 ---
 
-# 🧪 Sandbox
+# 🧪 Monorepo Development Setup
 
-The sandbox:
+This repository uses **npm workspaces**.
 
-- Creates a PixiJS Application
-- Loads textures using `Assets`
-- Mounts a demo scene
-- Hot reloads during development
-
-To build sandbox only:
+### Clone & Install
 
 ```bash
-npm run build -w pixi-sandbox
+git clone https://github.com/GandalfAl/pixi-particles
+cd pixi-particles
+npm install
 ```
 
-To build engine only:
+### Run Development Mode
+
+From the root directory:
 
 ```bash
-npm run build -w pixi-particles-engine
+npm run dev
 ```
+
+This will:
+
+- Watch and rebuild the engine (`tsc -w`)
+- Start the sandbox (`webpack serve` on port 3000)
+
+Open:
+
+http://localhost:3000
+
+---
+
+# 🏗 Project Structure
+
+    pixi-particles/
+    ├── pixi-particles-engine/
+    │   ├── src/
+    │   ├── package.json
+    │   └── tsconfig.json
+    │
+    ├── pixi-sandbox/
+    │   ├── src/
+    │   ├── public/
+    │   ├── webpack.config.js
+    │   └── package.json
+    │
+    └── package.json (workspace root)
 
 ---
 
 # ⚠️ Notes
 
-- The engine is published on npm as pixi-particles-engine
-- The pixi-sandbox project consumes it via workspace for local development.
-- When working outside the monorepo, install it directly from npm:
-
-```bash
-npm install pixi-particles-engine
-```
+- The engine is published on npm as `pixi-particles-engine`.
+- The `pixi-sandbox` project consumes it via workspace for local
+  development.
+- Outside this monorepo, install it directly from npm.
 
 ---
 
@@ -222,5 +199,5 @@ MIT
 
 # 👑 Author
 
-GandalfAl
+GandalfAl\
 Aljaz Stucin
