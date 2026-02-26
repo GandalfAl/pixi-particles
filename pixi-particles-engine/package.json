@@ -1,6 +1,6 @@
 {
     "name": "pixi-particles-engine",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "High-performance PixiJS v8 particle engine with behaviours and pooling",
     "license": "MIT",
     "repository": {
