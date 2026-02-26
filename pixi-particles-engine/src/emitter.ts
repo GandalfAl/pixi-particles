@@ -281,7 +281,7 @@ export class Emitter extends ParticleContainer {
             p.rotation += p.angleV * dt;
 
             // Apply behaviours in sorted order.
-            for (const entry of this.behaviours) entry.b.apply?.(p, dt, this);
+            for (const entry of this.behaviours) entry.b.update?.(p, dt, this);
 
             // Kill particle if it exceeded its lifetime.
             if (p.age >= p.life) {

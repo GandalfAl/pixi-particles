@@ -15,7 +15,7 @@ export class GravityCurveBehaviour implements Behaviour {
         this.strength = new Curve(strengthKeyframes, opts);
     }
 
-    public apply(p: PxParticle, dt: number) {
+    public update(p: PxParticle, dt: number) {
         const t = p.life > 0 ? p.age / p.life : 1;
         const s = this.strength.sample(t);
 

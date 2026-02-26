@@ -14,7 +14,7 @@ export class AlphaBehaviour implements Behaviour {
         p.alpha = this.startAlpha;
     }
 
-    public apply(p: PxParticle, _dt: number, _emitter: Emitter): void {
+    public update(p: PxParticle, _dt: number, _emitter: Emitter): void {
         const t = p.life > 0 ? Math.min(1, Math.max(0, p.age / p.life)) : 1;
         p.alpha = this.startAlpha + (this.endAlpha - this.startAlpha) * t;
     }

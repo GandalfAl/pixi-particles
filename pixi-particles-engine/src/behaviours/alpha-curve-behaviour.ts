@@ -16,7 +16,7 @@ export class AlphaCurveBehaviour implements Behaviour {
         p.alpha = this.curve.sample(0);
     }
 
-    public apply(p: PxParticle) {
+    public update(p: PxParticle) {
         const t = p.life > 0 ? p.age / p.life : 1;
         p.alpha = this.curve.sample(t);
     }

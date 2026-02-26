@@ -18,7 +18,7 @@ export class ScaleCurveBehaviour implements Behaviour {
         p.scaleY = s;
     }
 
-    public apply(p: PxParticle) {
+    public update(p: PxParticle) {
         const t = p.life > 0 ? p.age / p.life : 1;
         const s = this.curve.sample(t);
         p.scaleX = s;
