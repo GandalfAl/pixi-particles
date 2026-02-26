@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin"); // ✅ Add this line
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { webpack } = require("webpack");
 const { DefinePlugin } = require("webpack");
 
@@ -38,10 +38,6 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, "assets"), // source folder
                     to: "assets", // destination inside dist/
-                },
-                {
-                    from: path.resolve(__dirname, "../winzaro-framework/src/assets"),
-                    to: "assets",
                 },
             ],
         }),

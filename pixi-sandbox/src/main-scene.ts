@@ -1,10 +1,9 @@
-import { Container, Graphics } from "pixi.js";
+import { Container } from "pixi.js";
 import { Scene } from "./scene";
 import {
     AlphaBehaviour,
     Emitter,
     RadialBurstBehaviour,
-    RectangleSpawnBehaviour,
     ScaleCurveBehaviour,
     SingleTextureProvider,
     StaticRotationBehaviour,
