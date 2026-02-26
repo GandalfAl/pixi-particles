@@ -204,8 +204,13 @@ npm run build -w pixi-particles-engine
 
 # ⚠️ Notes
 
-- The engine is not published to npm by default --- it's consumed via
-  workspace.
+- The engine is published on npm as pixi-particles-engine
+- The pixi-sandbox project consumes it via workspace for local development.
+- When working outside the monorepo, install it directly from npm:
+
+```bash
+npm install pixi-particles-engine
+```
 
 ---
 
