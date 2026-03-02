@@ -13,7 +13,9 @@ module.exports = {
     },
     resolve: {
         extensions: [".ts", ".js"],
-        conditionNames: ["development", "import", "module", "default"], // Condition names so that development can use typescript files for debugging (we set  "development": "./src/index.ts", in particles-engine)
+        alias: {
+            "pixi-particles-engine": path.resolve(__dirname, "../pixi-particles-engine/src/index.ts"),
+        },
     },
     module: {
         rules: [

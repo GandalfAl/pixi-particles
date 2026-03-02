@@ -5,9 +5,6 @@
         "pixi-particles-engine"
     ],
     "scripts": {
-        "dev": "concurrently \"npm run watch -w pixi-particles-engine\" \"npm run start -w pixi-sandbox\""
-    },
-    "devDependencies": {
-        "concurrently": "^9.2.1"
+        "dev": "npm run start -w pixi-sandbox"
     }
 }
