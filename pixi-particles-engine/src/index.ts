@@ -13,6 +13,7 @@ export * from "./behaviours/spawn-behaviours/circle-spawn-behaviour";
 export * from "./behaviours/spawn-behaviours/rectangle-spawn-behaviour";
 export * from "./behaviours/static-behaviours/static-rotation-behaviour";
 export * from "./behaviours/static-behaviours/static-scale-behaviour";
+export * from "./behaviours/rotation-curve-behaviour";
 export * from "./texture-providers/animated-texture-provider";
 export * from "./texture-providers/single-texture-provider";
 export * from "./texture-providers/weighted-texture-provider";

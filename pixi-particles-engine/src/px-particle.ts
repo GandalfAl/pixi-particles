@@ -35,8 +35,11 @@ export class PxParticle extends Particle {
     /** Velocity in pixels per second (Y axis). */
     public vy = 0;
 
-    /** Angular velocity in radians per second. */
-    public angleV = 0;
+    /** Base angular velocity in radians per second. */
+    private _angleVBase = 0;
+
+    /** Base angular velocity scale for angleVBase */
+    private _angleVScale = 1;
 
     /**
      * Optional provider-specific animation state.
@@ -55,6 +58,18 @@ export class PxParticle extends Particle {
         this.onKill();
     }
 
+    public set angleVBase(base: number) {
+        this._angleVBase = base;
+    }
+
+    public set angleVScale(scale: number) {
+        this._angleVScale = scale;
+    }
+
+    public get angleV(): number {
+        return this._angleVBase * this._angleVScale;
+    }
+
     /**
      * Resets the particle into pooled (inactive) state.
      *
@@ -70,7 +85,8 @@ export class PxParticle extends Particle {
 
         this.vx = 0;
         this.vy = 0;
-        this.angleV = 0;
+        this._angleVBase = 0;
+        this._angleVScale = 1;
 
         this.animatedParticleState = undefined;
     }
@@ -90,7 +106,8 @@ export class PxParticle extends Particle {
 
         this.vx = 0;
         this.vy = 0;
-        this.angleV = 0;
+        this._angleVBase = 0;
+        this._angleVScale = 1;
 
         this.animatedParticleState = undefined;
 

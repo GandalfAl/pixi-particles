@@ -5,7 +5,7 @@ import { PxParticle } from "../../px-particle";
  * Sets a particle's angular velocity at spawn time.
  *
  * Does NOT modify rotation per frame directly.
- * Instead, it initializes `angleV`, which the emitter integrates each tick.
+ * Instead, it initializes `angleVBase`, which the emitter integrates each tick.
  *
  * Supports:
  *
@@ -56,7 +56,7 @@ export class StaticRotationBehaviour implements Behaviour {
     public onSpawn(p: PxParticle) {
         const s = typeof this.speed === "number" ? this.speed : this.randomRange(this.speed.min, this.speed.max, this.speed.minAbs);
 
-        p.angleV = s;
+        p.angleVBase = s;
     }
 
     private randomRange(min: number, max: number, minAbs?: number): number {
