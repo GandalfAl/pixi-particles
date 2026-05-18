@@ -18,8 +18,8 @@ export class CircleSpawnBehaviour implements Behaviour {
     public readonly priority = -100;
 
     constructor(
-        private readonly radius: number,
-        private readonly innerRadius: number = 0,
+        public radius: number,
+        public innerRadius: number = 0,
     ) {}
 
     public onSpawn(p: PxParticle) {
